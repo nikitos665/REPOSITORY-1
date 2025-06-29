@@ -1,0 +1,41 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>lab24</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="" method="post">
+        <input type="text" placeholder="Type n" name="n">
+         <button class="button" type="reset">Reset</button>
+        <br>
+        <input type="text" placeholder="Type x" name="x">
+        <button class="button" type="submit">Send</button>
+    </form>
+    <p>
+    <%
+    String nParam = request.getParameter("n");
+    String xParam = request.getParameter("x");
+    if (nParam != null && xParam != null) {
+        try{
+            double x = Double.parseDouble(xParam);
+            int n = Double.parseInt(nParam);
+            if(x > 1){
+                double arcctg = 0;
+                for(int i = 0;i < n; i++){
+                    arcctg += Math.pow(-1,i+1) / ((2*i+1) * Math.pow(x,(2*i+1)));
+                }   
+                out.println("Result: "+ (arcctg + Math.PI/2));
+            }
+            else out.println("Value of x is incorrect");
+        }
+        catch(NumberFormatException e){
+            out.println("incorrect value");
+        }
+    }
+    %>
+</p>
+</body>
+</html>
